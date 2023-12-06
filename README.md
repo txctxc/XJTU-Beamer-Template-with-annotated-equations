@@ -42,7 +42,7 @@ Windows环境变量安装python，以及安装[pygments](https://pygments.org/)�
 
 ## 编译方法
 
-选择 `slide.tex`，然后点击侧栏tex插件图标，在 `COMMANDS`里面的 `Build LaTeX project`里面选择 `Recipe: latexmkbeamer`
+注意为了使`.vscode`工作空间配置`settings.json`生效，必须将本项目作为根目录在VSCode中打开[见VSCode官方教程User and Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings#_workspace-settingsjson-location)。选择 `slide.tex`，然后点击侧栏tex插件图标，在 `COMMANDS`里面的 `Build LaTeX project`里面选择 `Recipe: latexmkbeamer`
 或者在命令行切换到slide.tex所在文件夹，执行命令：
 
 ```
