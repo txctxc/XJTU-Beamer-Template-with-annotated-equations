@@ -54,3 +54,159 @@ latexmk -xelatex -shell-escape slide
 1. 缺少bib参考文献。[这个issue](https://github.com/st--/annotate-equations/issues/21)有讨论，问题尚未解决，猜测可能是用到的 `st--/annotate-equations`库和bibtex用xelatex之间不兼容，总之目前尚无法添加参考文献bib功能。
 2. 暂未实现如何一键清理多余文件。
 3. 未添加表头和图名功能，还有许多其它的功能，其实在第二代模板里面[overleaf xjtu-beamer-theme-2022年上传](https://www.overleaf.com/latex/templates/xjtu-beamer-theme/ddhzxgwqbvsy)都有，后面会考虑怎么把这些功能加进来。
+4. VSCode缺少tex和pdf文件之间的正反向索引配置，需要在settings.json中配置，参考[这篇知乎的文章](https://zhuanlan.zhihu.com/p/166523064)。
+```json
+{
+ //------------------------------LaTeX 配置----------------------------------
+    // 设置是否自动编译
+    "latex-workshop.latex.autoBuild.run":"never",
+    //右键菜单
+    "latex-workshop.showContextMenu":true,
+    //从使用的包中自动补全命令和环境
+    "latex-workshop.intellisense.package.enabled": true,
+    //编译出错时设置是否弹出气泡设置
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.warning.show": false,
+    // 编译工具和命令
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    // 用于配置编译链
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "XeLaTeX",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "PDFLaTeX",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "BibTeX",
+            "tools": [
+                "bibtex"
+            ]
+        },
+        {
+            "name": "LaTeXmk",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "xelatex -> bibtex -> xelatex*2",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    //文件清理。此属性必须是字符串数组
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk"
+    ],
+    //设置为onFaild 在构建失败后清除辅助文件
+    "latex-workshop.latex.autoClean.run": "onFailed",
+    // 使用上次的recipe编译组合
+    "latex-workshop.latex.recipe.default": "lastUsed",
+    // 用于反向同步的内部查看器的键绑定。ctrl/cmd +点击(默认)或双击
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+
+
+
+    //使用 SumatraPDF 预览编译好的PDF文件
+    // 设置VScode内部查看生成的pdf文件
+    "latex-workshop.view.pdf.viewer": "external",
+    // PDF查看器用于在\ref上的[View on PDF]链接
+    "latex-workshop.view.pdf.ref.viewer":"auto",
+    // 使用外部查看器时要执行的命令。此功能不受官方支持。
+    "latex-workshop.view.pdf.external.viewer.command": "F:/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    // 使用外部查看器时，latex-workshop.view.pdf.external.view .command的参数。此功能不受官方支持。%PDF%是用于生成PDF文件的绝对路径的占位符。
+    "latex-workshop.view.pdf.external.viewer.args": [
+        "%PDF%"
+    ],
+    // 将synctex转发到外部查看器时要执行的命令。此功能不受官方支持。
+    "latex-workshop.view.pdf.external.synctex.command": "F:/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    // latex-workshop.view.pdf.external.synctex的参数。当同步到外部查看器时。%LINE%是行号，%PDF%是生成PDF文件的绝对路径的占位符，%TEX%是触发syncTeX的扩展名为.tex的LaTeX文件路径。
+    "latex-workshop.view.pdf.external.synctex.args": [
+        "-forward-search",
+        "%TEX%",
+        "%LINE%",
+        "-reuse-instance",
+        "-inverse-search",
+        "\"F:/Microsoft VS Code/Code.exe\" \"F:/Microsoft VS Code/resources/app/out/cli.js\" -r -g \"%f:%l\"", // 注意修改路径
+        "%PDF%"
+    ]
+}
+```
