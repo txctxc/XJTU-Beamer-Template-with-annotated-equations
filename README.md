@@ -23,7 +23,7 @@ Windows环境变量安装python，以及安装[pygments](https://pygments.org/)�
 
 本仓库模板基于这个包含公式注释功能的XJTU beamer 模板[annotate-equations-example](https://github.com/hjnnjh/annotate-equations-example)，因为我还没学习怎么使用GitHub的fork和pull这些的协作功能，就只能重新建了个仓库，基本上和[annotate-equations-example](https://github.com/hjnnjh/annotate-equations-example)仓库是一样的，改进的一些功能有：
 
-1. 添加了 `.vscode`文件夹，放置VSCode工作区环境配置文件 `settings.json`，这个配置是参考的[XJTU Thesis Latex模板](https://github.com/obster-y/XJTU-thesis)的配置，但是我还没完全看懂，就比如一键清理多余文件的功能我就没有在这个模板里实现；
+1. 添加了 `.vscode`文件夹，放置VSCode工作区环境配置文件 `settings.json`，这个配置是参考的[XJTU Thesis Latex模板](https://github.com/obster-y/XJTU-thesis)的配置，但是我还没完全看懂。实现了一键清理多余文件的功能；
 2. 修复了[annotate-equations-example](https://github.com/hjnnjh/annotate-equations-example)在Windows系统上编译缺少Mac自带的字体的问题，在 `slide.tex`文件里面注释掉了下面这两行：
 
 ```
@@ -48,13 +48,16 @@ Windows环境变量安装python，以及安装[pygments](https://pygments.org/)�
 ```
 latexmk -xelatex -shell-escape slide
 ```
+## tex和pdf文件之间的正反向索引
+
+在pdf内双击，以回到tex对应的位置；
+在tex文件内按下快捷键`ctrl+alt+j`，或者鼠标右键菜单选择SyncTex from cursor，以转到pdf对应位置。
 
 ## 存在的不足
 
 1. 缺少bib参考文献。[这个issue](https://github.com/st--/annotate-equations/issues/21)有讨论，问题尚未解决，猜测可能是用到的 `st--/annotate-equations`库和bibtex用xelatex之间不兼容，总之目前尚无法添加参考文献bib功能。
-2. 暂未实现如何一键清理多余文件。
-3. 未添加表头和图名功能，还有许多其它的功能，其实在第二代模板里面[overleaf xjtu-beamer-theme-2022年上传](https://www.overleaf.com/latex/templates/xjtu-beamer-theme/ddhzxgwqbvsy)都有，后面会考虑怎么把这些功能加进来。
-4. VSCode缺少tex和pdf文件之间的正反向索引配置，需要在settings.json中配置，参考[这篇知乎的文章](https://zhuanlan.zhihu.com/p/166523064)。
+2. 未添加表头和图名功能，还有许多其它的功能，其实在第二代模板里面[overleaf xjtu-beamer-theme-2022年上传](https://www.overleaf.com/latex/templates/xjtu-beamer-theme/ddhzxgwqbvsy)都有，后面会考虑怎么把这些功能加进来。
+3. 若要实现VSCode在settings.json中配置使用外部SumatraPDF查看PDF，可以参考[这篇知乎的文章](https://zhuanlan.zhihu.com/p/166523064)。
 ```json
 {
  //------------------------------LaTeX 配置----------------------------------
