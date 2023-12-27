@@ -46,7 +46,7 @@ Windows环境变量安装python，以及安装[pygments](https://pygments.org/)�
 或者在命令行切换到slide.tex所在文件夹，执行命令：
 
 ```
-latexmk -xelatex -shell-escape slide
+latexmk -xelatex -shell-escape slide.tex
 ```
 ## tex和pdf文件之间的正反向索引
 
@@ -55,7 +55,7 @@ latexmk -xelatex -shell-escape slide
 
 ## 存在的不足
 
-1. 缺少bib参考文献。[这个issue](https://github.com/st--/annotate-equations/issues/21)有讨论，问题尚未解决，猜测可能是用到的 `st--/annotate-equations`库和bibtex用xelatex之间不兼容，总之目前尚无法添加参考文献bib功能。
+1. 缺少bib参考文献。[这个issue](https://github.com/st--/annotate-equations/issues/21)有讨论，问题尚未解决，猜测可能是用到的 `st--/annotate-equations`库和bibtex用xelatex之间不兼容，~~总之目前尚无法添加参考文献bib功能~~,见[Issue#1](https://github.com/txctxc/XJTU-Beamer-Template-with-annotated-equations/issues/1)。
 2. 未添加表头和图名功能，还有许多其它的功能，其实在第二代模板里面[overleaf xjtu-beamer-theme-2022年上传](https://www.overleaf.com/latex/templates/xjtu-beamer-theme/ddhzxgwqbvsy)都有，后面会考虑怎么把这些功能加进来。
 3. 若要实现VSCode在settings.json中配置使用外部SumatraPDF查看PDF，可以参考[这篇知乎的文章](https://zhuanlan.zhihu.com/p/166523064)。
 ```json
